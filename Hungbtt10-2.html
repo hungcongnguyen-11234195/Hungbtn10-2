@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Count</title>
+</head>
+<body>
+    <h2>Word Frequency Counter</h2>
+    <textarea id="textInput" placeholder="Enter text here..." rows="5" cols="50"></textarea>
+    <br>
+    <button onclick="countWords()">Count Words</button>
+    <p id="result"></p>
+
+    <script>
+        function countWords() {
+            let text = document.getElementById("textInput").value;
+            
+            if (!text.trim()) {
+                document.getElementById("result").innerText = "Please enter valid text.";
+                return;
+            }
+            
+            let words = text.toLowerCase().match(/\b\w+\b/g);
+            let wordCount = {};
+            
+            words.forEach(word => {
+                wordCount[word] = (wordCount[word] || 0) + 1;
+            });
+            
+            let resultText = "Word occurrences:\n";
+            for (let word in wordCount) {
+                resultText += `${word}: ${wordCount[word]}\n`;
+            }
+            
+            document.getElementById("result").innerText = resultText;
+        }
+    </script>
+</body>
+</html>
